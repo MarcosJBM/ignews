@@ -1,8 +1,9 @@
 import Head from 'next/head';
 import styles from './home.module.scss';
 import { SubscribeButton } from '@/components';
-import { GetServerSideProps } from 'next';
+import { GetStaticProps } from 'next';
 import { stripe } from '@/services';
+import Image from 'next/image';
 
 interface HomeProps {
   product: {
@@ -10,6 +11,7 @@ interface HomeProps {
     amount: number;
   };
 }
+
 export default function Home({ product }: HomeProps) {
   return (
     <>
@@ -33,13 +35,19 @@ export default function Home({ product }: HomeProps) {
           <SubscribeButton priceId={product.priceId} />
         </section>
 
-        <img src='/images/avatar.svg' alt='Girl coding' />
+        <Image
+          src='/images/avatar.svg'
+          alt='Girl coding'
+          width={334}
+          height={520}
+          priority
+        />
       </main>
     </>
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const price = await stripe.prices.retrieve('price_1MpeQ6IxgNCujPqX7M1qTCGf');
 
   const unitAmount = price.unit_amount ? price.unit_amount / 100 : 0;
@@ -58,5 +66,6 @@ export const getServerSideProps: GetServerSideProps = async () => {
     props: {
       product,
     },
+    revalidate: 60 * 60 * 24, // 24 hours
   };
 };
