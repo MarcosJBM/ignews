@@ -13,9 +13,23 @@ export const authOptions: AuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     async signIn(user) {
+      if (!user.user.email) return false;
+
       try {
         await fauna.query(
-          q.Create(q.Collection('users'), { data: { email: user.user.email } })
+          q.If(
+            q.Not(
+              q.Exists(
+                q.Match(q.Index('user_by_email'), q.Casefold(user.user.email))
+              )
+            ),
+            q.Create(q.Collection('users'), {
+              data: { email: user.user.email },
+            }),
+            q.Get(
+              q.Match(q.Index('user_by_email'), q.Casefold(user.user.email))
+            )
+          )
         );
 
         return true;
