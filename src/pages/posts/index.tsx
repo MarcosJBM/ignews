@@ -1,7 +1,21 @@
 import Head from 'next/head';
 import styles from './styles.module.scss';
+import { GetStaticProps } from 'next';
+import { createClient } from '../../../prismicio';
+import { RichText } from 'prismic-dom';
 
-export default function Posts() {
+interface PostProps {
+  slug: string | null;
+  title: string;
+  summary: string;
+  updatedAt: string;
+}
+
+interface PostsProps {
+  posts: PostProps[];
+}
+
+export default function Posts({ posts }: PostsProps) {
   return (
     <>
       <Head>
@@ -10,20 +24,11 @@ export default function Posts() {
 
       <main className={styles.container}>
         <div className={styles.posts}>
-          {[1, 2, 3].map(key => (
-            <a key={key.toString()} href='#'>
-              <time>12 de março de 2023</time>
-
-              <strong>
-                Do back ao mobile: de onde surgiu a programação fullstack
-              </strong>
-
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus
-                odit, reiciendis libero ad dolorum quo iusto, odio aut neque
-                optio vel voluptatibus? Autem optio tempora mollitia, a minus
-                aperiam earum.
-              </p>
+          {posts.map(post => (
+            <a key={post.slug} href='#'>
+              <time>{post.updatedAt}</time>
+              <strong>{post.title}</strong>
+              <p>{post.summary}</p>
             </a>
           ))}
         </div>
@@ -31,3 +36,31 @@ export default function Posts() {
     </>
   );
 }
+
+export const getStaticProps: GetStaticProps = async ({ previewData }) => {
+  const client = createClient({ previewData });
+
+  const documents = await client.getByType('post');
+
+  const posts = documents.results.map(post => {
+    return {
+      slug: post.uid,
+      title: RichText.asText(post.data.title),
+      summary:
+        post.data.content.find((content: any) => content.type === 'paragraph')
+          ?.text ?? '',
+      updatedAt: new Date(post.last_publication_date).toLocaleDateString(
+        'pt-BR',
+        {
+          day: '2-digit',
+          month: 'long',
+          year: 'numeric',
+        }
+      ),
+    };
+  });
+
+  return {
+    props: { posts },
+  };
+};
