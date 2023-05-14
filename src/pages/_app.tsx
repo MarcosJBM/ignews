@@ -4,15 +4,19 @@ import { SessionProvider } from 'next-auth/react';
 import { Header } from '@/components';
 
 import '../styles/global.scss';
+import { PrismicPreview } from '@prismicio/next';
+import { repositoryName } from '../../prismicio';
 
 export default function App({
   Component,
   pageProps: { session, ...pageProps },
 }: AppProps) {
   return (
-    <SessionProvider session={session}>
-      <Header />
-      <Component {...pageProps} />
-    </SessionProvider>
+    <PrismicPreview repositoryName={repositoryName}>
+      <SessionProvider session={session}>
+        <Header />
+        <Component {...pageProps} />
+      </SessionProvider>
+    </PrismicPreview>
   );
 }
