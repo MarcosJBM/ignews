@@ -5,6 +5,7 @@ import { RichText } from 'prismic-dom';
 import Head from 'next/head';
 
 import styles from './post.module.scss';
+import { Session } from 'next-auth';
 
 interface PostProps {
   post: {
@@ -14,6 +15,12 @@ interface PostProps {
     updatedAt: string;
   };
 }
+
+type CustomSession =
+  | (Session & {
+      activeSubscription: object | null;
+    })
+  | null;
 
 export default function Post({ post }: PostProps) {
   return (
@@ -43,7 +50,16 @@ export const getServerSideProps: GetServerSideProps = async ({
   params,
   previewData,
 }) => {
-  const session = await getSession({ req });
+  const session = (await getSession({ req })) as CustomSession;
+
+  if (!session?.activeSubscription) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  }
 
   const { slug } = params as { slug: string };
 
