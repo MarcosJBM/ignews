@@ -1,9 +1,10 @@
-import Head from 'next/head';
-import styles from './styles.module.scss';
 import { GetStaticProps } from 'next';
-import { createClient } from '../../../prismicio';
-import { RichText } from 'prismic-dom';
+import Head from 'next/head';
 import Link from 'next/link';
+import { RichText } from 'prismic-dom';
+
+import { createClient } from '../../../prismicio';
+import styles from './styles.module.scss';
 
 interface PostProps {
   slug: string | null;

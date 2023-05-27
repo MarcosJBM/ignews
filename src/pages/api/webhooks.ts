@@ -1,7 +1,9 @@
-import { stripe } from '@/services';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { Readable } from 'stream';
 import Stripe from 'stripe';
+
+import { stripe } from '@/services';
+
 import { saveSubscription } from './_lib';
 
 async function buffer(readable: Readable) {
@@ -54,7 +56,7 @@ export default async function webhooks(
       try {
         switch (type) {
           case 'customer.subscription.updated':
-          case 'customer.subscription.deleted':
+          case 'customer.subscription.deleted': {
             const subscription = event.data.object as Stripe.Subscription;
 
             await saveSubscription(
@@ -64,8 +66,8 @@ export default async function webhooks(
             );
 
             break;
-
-          case 'checkout.session.completed':
+          }
+          case 'checkout.session.completed': {
             const checkoutSession = event.data
               .object as Stripe.Checkout.Session;
 
@@ -76,7 +78,7 @@ export default async function webhooks(
             );
 
             break;
-
+          }
           default:
             throw new Error('Unhandled event.');
         }

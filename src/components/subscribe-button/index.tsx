@@ -1,12 +1,10 @@
-import { signIn, useSession } from 'next-auth/react';
-import styles from './styles.module.scss';
-import { api, getStripeJs } from '@/services';
 import { useRouter } from 'next/router';
 import { Session } from 'next-auth';
+import { signIn, useSession } from 'next-auth/react';
 
-interface SubscribeButtonProps {
-  priceId: string;
-}
+import { api, getStripeJs } from '@/services';
+
+import styles from './styles.module.scss';
 
 type CustomSession =
   | (Session & {
@@ -14,7 +12,7 @@ type CustomSession =
     })
   | null;
 
-export function SubscribeButton({ priceId }: SubscribeButtonProps) {
+export function SubscribeButton() {
   const { data: session } = useSession();
 
   const router = useRouter();

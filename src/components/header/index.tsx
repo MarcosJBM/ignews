@@ -1,9 +1,8 @@
 import Image from 'next/image';
 
-import { SignInButton } from '../sign-in-button';
-
-import styles from './styles.module.scss';
 import { ActiveLink } from '../active-link';
+import { SignInButton } from '../sign-in-button';
+import styles from './styles.module.scss';
 
 export function Header() {
   return (

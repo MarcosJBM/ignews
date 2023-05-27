@@ -1,11 +1,11 @@
 import { GetServerSideProps } from 'next';
-import { getSession } from 'next-auth/react';
-import { createClient } from '../../../prismicio';
-import { RichText } from 'prismic-dom';
 import Head from 'next/head';
-
-import styles from './post.module.scss';
 import { Session } from 'next-auth';
+import { getSession } from 'next-auth/react';
+import { RichText } from 'prismic-dom';
+
+import { createClient } from '../../../prismicio';
+import styles from './post.module.scss';
 
 interface PostProps {
   post: {
