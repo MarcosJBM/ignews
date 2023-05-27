@@ -25,6 +25,8 @@ type CustomSession =
     })
   | null;
 
+const THIRTY_MINUTES = 30 * 60;
+
 export default function PostPreview({ post }: PostPreviewProps) {
   const { data: session } = useSession();
   const router = useRouter();
@@ -62,7 +64,7 @@ export default function PostPreview({ post }: PostPreviewProps) {
   );
 }
 
-export const getStaticPaths: GetStaticPaths = () => {
+export const getStaticPaths: GetStaticPaths = async () => {
   return {
     paths: [],
     fallback: 'blocking',
@@ -93,5 +95,5 @@ export const getStaticProps: GetStaticProps = async ({
     ),
   };
 
-  return { props: { post } };
+  return { props: { post }, revalidate: THIRTY_MINUTES };
 };
