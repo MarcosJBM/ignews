@@ -49,8 +49,9 @@ export const getStaticProps: GetStaticProps = async ({ previewData }) => {
       slug: post.uid,
       title: RichText.asText(post.data.title),
       summary:
-        post.data.content.find((content: any) => content.type === 'paragraph')
-          ?.text ?? '',
+        post.data.content.find(
+          (content: { type: string }) => content.type === 'paragraph'
+        )?.text ?? '',
       updatedAt: new Date(post.last_publication_date).toLocaleDateString(
         'pt-BR',
         {
@@ -62,7 +63,5 @@ export const getStaticProps: GetStaticProps = async ({ previewData }) => {
     };
   });
 
-  return {
-    props: { posts },
-  };
+  return { props: { posts } };
 };

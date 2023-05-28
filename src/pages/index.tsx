@@ -14,6 +14,8 @@ interface HomeProps {
   };
 }
 
+const TWENTY_FOUR_HOURS = 60 * 60 * 24;
+
 export default function Home({ product }: HomeProps) {
   return (
     <>
@@ -64,10 +66,5 @@ export const getStaticProps: GetStaticProps = async () => {
     amount: formattedUnitAmount,
   };
 
-  return {
-    props: {
-      product,
-    },
-    revalidate: 60 * 60 * 24, // 24 hours
-  };
+  return { props: { product }, revalidate: TWENTY_FOUR_HOURS };
 };

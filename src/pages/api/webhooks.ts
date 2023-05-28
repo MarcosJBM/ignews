@@ -37,23 +37,16 @@ export default async function webhooks(
     const secret = request.headers['stripe-signature'];
     const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET as string;
 
+    if (!secret) return response.status(400).send('Secret not found');
+
     let event: Stripe.Event;
 
     try {
-      if (secret) {
-        event = stripe.webhooks.constructEvent(buf, secret, webhookSecret);
-      }
-    } catch (error) {
-      console.error(error);
-      if (error instanceof Error) {
-        return response.status(400).send(`Webhook Error: ${error.message}`);
-      }
-    }
+      event = stripe.webhooks.constructEvent(buf, secret, webhookSecret);
 
-    const { type } = event;
+      const { type } = event;
 
-    if (relevantEvents.has(type)) {
-      try {
+      if (relevantEvents.has(type)) {
         switch (type) {
           case 'customer.subscription.updated':
           case 'customer.subscription.deleted': {
@@ -71,19 +64,23 @@ export default async function webhooks(
             const checkoutSession = event.data
               .object as Stripe.Checkout.Session;
 
-            await saveSubscription(
-              checkoutSession.subscription?.toString(),
-              checkoutSession.customer?.toString(),
-              true
-            );
+            if (checkoutSession.subscription && checkoutSession.customer) {
+              await saveSubscription(
+                checkoutSession.subscription?.toString(),
+                checkoutSession.customer?.toString(),
+                true
+              );
+            }
 
             break;
           }
           default:
-            throw new Error('Unhandled event.');
+            throw new Error('Unhandled event');
         }
-      } catch (error) {
-        return response.json({ error: 'Webhook handler failed.' });
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        return response.status(400).send(`Webhook Error: ${error.message}`);
       }
     }
 
