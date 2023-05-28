@@ -1,38 +1,46 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<div align='center'>
+  <img src='.github/logo.svg' alt='Logo do projeto'/>
+</div>
 
-## Getting Started
+<div align='center'>
+  <a href='#about'>📖 Sobre</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#design">🎨 Design</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href='#technologies'>🔩 Tecnologias</a>
+</div>
 
-First, run the development server:
+</br>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+<div align="center">
+  <img src=".github/front-cover.png" alt="Capa do projeto ig.news" width="780px" />
+</div>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<a id="about"></a>
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+# 📖 Sobre o Projeto
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+O **ig.news** é um blog focado em noticias sobre o mundo React.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+É o terceiro projeto a ser desenvolvido na trilha de ReactJS do curso Ignite da Rocketseat.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+A aplicação foi hospedada na [**Vercel**](https://vercel.com/), caso queira dar uma olhada, clique [**aqui**](https://ignews-ten-drab.vercel.app/).
 
-## Learn More
+<a id="design"></a>
 
-To learn more about Next.js, take a look at the following resources:
+# 🎨 Design
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+O design da aplicação está disponivel no [**Figma**](https://www.figma.com/), caso tenha interesse, clique [**aqui**](https://www.figma.com/file/120hhKWOuOxH0Okkqi95Bn/ig.news?type=design&node-id=1%3A2&t=NU9bbrr1Jx0EiG4u-1).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+<a id="technologies"></a>
 
-## Deploy on Vercel
+# 🔩 Tecnologias
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Estas foram as principais tecnologias utilizadas no desenvolvimento da aplicação.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- [React](https://react.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [NextJS](https://nextjs.org/)
+- [NextAuth](https://next-auth.js.org/)
+- [Prismic](https://prismic.io/)
+- [Stripe](https://stripe.com/br)
+- [FaunaDB](https://fauna.com/)
+- [Sass](https://sass-lang.com/)
