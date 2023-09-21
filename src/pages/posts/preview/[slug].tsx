@@ -91,7 +91,7 @@ export const getStaticProps: GetStaticProps = async ({
         day: '2-digit',
         month: 'long',
         year: 'numeric',
-      }
+      },
     ),
   };
 

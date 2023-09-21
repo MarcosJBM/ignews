@@ -25,14 +25,14 @@ export const authOptions: AuthOptions = {
                   q.Get(
                     q.Match(
                       q.Index('user_by_email'),
-                      q.Casefold(session.user?.email || '')
-                    )
-                  )
-                )
+                      q.Casefold(session.user?.email || ''),
+                    ),
+                  ),
+                ),
               ),
               q.Match(q.Index('subscription_by_status'), 'active'),
-            ])
-          )
+            ]),
+          ),
         );
 
         return {
@@ -54,16 +54,16 @@ export const authOptions: AuthOptions = {
           q.If(
             q.Not(
               q.Exists(
-                q.Match(q.Index('user_by_email'), q.Casefold(user.user.email))
-              )
+                q.Match(q.Index('user_by_email'), q.Casefold(user.user.email)),
+              ),
             ),
             q.Create(q.Collection('users'), {
               data: { email: user.user.email },
             }),
             q.Get(
-              q.Match(q.Index('user_by_email'), q.Casefold(user.user.email))
-            )
-          )
+              q.Match(q.Index('user_by_email'), q.Casefold(user.user.email)),
+            ),
+          ),
         );
 
         return true;
