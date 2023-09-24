@@ -50,7 +50,7 @@ export const getStaticProps: GetStaticProps = async ({ previewData }) => {
       title: RichText.asText(post.data.title),
       summary:
         post.data.content.find(
-          (content: { type: string }) => content.type === 'paragraph'
+          (content: { type: string }) => content.type === 'paragraph',
         )?.text ?? '',
       updatedAt: new Date(post.last_publication_date).toLocaleDateString(
         'pt-BR',
@@ -58,7 +58,7 @@ export const getStaticProps: GetStaticProps = async ({ previewData }) => {
           day: '2-digit',
           month: 'long',
           year: 'numeric',
-        }
+        },
       ),
     };
   });

@@ -30,7 +30,7 @@ const relevantEvents = new Set([
 
 export default async function webhooks(
   request: NextApiRequest,
-  response: NextApiResponse
+  response: NextApiResponse,
 ) {
   if (request.method === 'POST') {
     const buf = await buffer(request);
@@ -55,7 +55,7 @@ export default async function webhooks(
             await saveSubscription(
               subscription.id,
               subscription.customer.toString(),
-              false
+              false,
             );
 
             break;
@@ -68,7 +68,7 @@ export default async function webhooks(
               await saveSubscription(
                 checkoutSession.subscription?.toString(),
                 checkoutSession.customer?.toString(),
-                true
+                true,
               );
             }
 
