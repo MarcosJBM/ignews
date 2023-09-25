@@ -1,11 +1,10 @@
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
+import { Fragment } from 'react';
 
 import { SubscribeButton } from '@/components';
 import { stripe } from '@/services';
-
-import styles from './home.module.scss';
 
 interface HomeProps {
   product: {
@@ -18,22 +17,24 @@ const TWENTY_FOUR_HOURS = 60 * 60 * 24;
 
 export default function Home({ product }: HomeProps) {
   return (
-    <>
+    <Fragment>
       <Head>
         <title>ig.news</title>
       </Head>
 
-      <main className={styles.contentContainer}>
-        <section className={styles.hero}>
-          <span>👏 Hey, welcome</span>
+      <main className='flex items-center justify-between max-w-6xl h-[calc(100vh-5rem)] mx-auto py-0 px-8'>
+        <section className='max-w-[600px]'>
+          <span className='text-2xl font-bold'>👏 Hey, welcome</span>
 
-          <h1>
-            News about the <span>React</span> world.
+          <h1 className='mt-10 text-7xl font-black'>
+            News about the <span className='text-cyan-500'>React</span> world.
           </h1>
 
-          <p>
+          <p className='mt-6 mb-10 text-2xl leading-9'>
             Get access to all the publications <br />
-            <span>for {product.amount} month</span>
+            <span className='font-bold text-cyan-500'>
+              for {product.amount} month
+            </span>
           </p>
 
           <SubscribeButton />
@@ -47,7 +48,7 @@ export default function Home({ product }: HomeProps) {
           priority
         />
       </main>
-    </>
+    </Fragment>
   );
 }
 
