@@ -2,9 +2,9 @@ import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import { RichText } from 'prismic-dom';
+import { Fragment } from 'react';
 
 import { createClient } from '../../../prismicio';
-import styles from './styles.module.scss';
 
 interface PostProps {
   slug: string | null;
@@ -19,23 +19,35 @@ interface PostsProps {
 
 export default function Posts({ posts }: PostsProps) {
   return (
-    <>
+    <Fragment>
       <Head>
         <title>Posts | ig.news</title>
       </Head>
 
-      <main className={styles.container}>
-        <div className={styles.posts}>
+      <main className='mx-auto max-w-6xl px-8 py-0'>
+        <div className='mx-auto mt-20 max-w-3xl'>
           {posts.map(post => (
-            <Link key={post.slug} href={`/posts/${post.slug}`}>
-              <time>{post.updatedAt}</time>
-              <strong>{post.title}</strong>
-              <p>{post.summary}</p>
+            <Link
+              className='mt-8 block border-t border-solid border-gray-700 pt-8 first:border-0'
+              key={post.slug}
+              href={`/posts/${post.slug}`}
+            >
+              <time className='flex items-center text-base text-gray-300'>
+                {post.updatedAt}
+              </time>
+
+              <strong className='mt-4 block text-2xl leading-8 transition duration-200 hover:text-yellow-500'>
+                {post.title}
+              </strong>
+
+              <p className='mt-2 leading-[1.625rem] text-gray-300'>
+                {post.summary}
+              </p>
             </Link>
           ))}
         </div>
       </main>
-    </>
+    </Fragment>
   );
 }
 
