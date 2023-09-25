@@ -22,7 +22,7 @@ export default function Home({ product }: HomeProps) {
         <title>ig.news</title>
       </Head>
 
-      <main className='flex items-center justify-between max-w-6xl h-[calc(100vh-5rem)] mx-auto py-0 px-8'>
+      <main className='mx-auto flex h-[calc(100vh-5rem)] max-w-6xl items-center justify-between px-8 py-0'>
         <section className='max-w-[600px]'>
           <span className='text-2xl font-bold'>👏 Hey, welcome</span>
 
@@ -30,7 +30,7 @@ export default function Home({ product }: HomeProps) {
             News about the <span className='text-cyan-500'>React</span> world.
           </h1>
 
-          <p className='mt-6 mb-10 text-2xl leading-9'>
+          <p className='mb-10 mt-6 text-2xl leading-9'>
             Get access to all the publications <br />
             <span className='font-bold text-cyan-500'>
               for {product.amount} month
