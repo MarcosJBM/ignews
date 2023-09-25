@@ -1,4 +1,4 @@
-import '../styles/global.scss';
+import '../styles/global.css';
 
 import { PrismicPreview } from '@prismicio/next';
 import type { AppProps } from 'next/app';
