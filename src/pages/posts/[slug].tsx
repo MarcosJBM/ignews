@@ -3,9 +3,9 @@ import Head from 'next/head';
 import { Session } from 'next-auth';
 import { getSession } from 'next-auth/react';
 import { RichText } from 'prismic-dom';
+import { Fragment } from 'react';
 
 import { createClient } from '../../../prismicio';
-import styles from './post.module.scss';
 
 interface PostProps {
   post: {
@@ -24,24 +24,26 @@ type CustomSession =
 
 export default function Post({ post }: PostProps) {
   return (
-    <>
+    <Fragment>
       <Head>
         <title>{post.title} | ig.news</title>
       </Head>
 
-      <main className={styles.container}>
-        <article className={styles.post}>
-          <h1>{post.title}</h1>
+      <main className='mx-auto my-0 max-w-6xl px-8 py-0'>
+        <article className='mx-auto mt-20 max-w-3xl'>
+          <h1 className='text-[3.5rem] font-black'>{post.title}</h1>
 
-          <time>{post.updatedAt}</time>
+          <time className='mt-6 block text-base text-gray-300'>
+            {post.updatedAt}
+          </time>
 
           <div
-            className={styles.postContent}
+            className='mt-8 text-lg leading-8 text-gray-100 [&_li]:mt-2 [&_p]:mt-6 [&_ul]:mt-6 [&_ul]:pl-6'
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
         </article>
       </main>
-    </>
+    </Fragment>
   );
 }
 
