@@ -5,10 +5,9 @@ import { useRouter } from 'next/router';
 import { Session } from 'next-auth';
 import { useSession } from 'next-auth/react';
 import { RichText } from 'prismic-dom';
-import { useEffect } from 'react';
+import { Fragment, useEffect } from 'react';
 
 import { createClient } from '../../../../prismicio';
-import styles from '../post.module.scss';
 
 interface PostPreviewProps {
   post: {
@@ -38,29 +37,33 @@ export default function PostPreview({ post }: PostPreviewProps) {
   }, [customSession, post.slug, router]);
 
   return (
-    <>
+    <Fragment>
       <Head>
         <title>{post.title} | ig.news</title>
       </Head>
 
-      <main className={styles.container}>
-        <article className={styles.post}>
-          <h1>{post.title}</h1>
+      <main className='mx-auto my-0 max-w-6xl px-8 py-0'>
+        <article className='mx-auto mt-20 max-w-3xl'>
+          <h1 className='text-[3.5rem] font-black'>{post.title}</h1>
 
-          <time>{post.updatedAt}</time>
+          <time className='mt-6 block text-base text-gray-300'>
+            {post.updatedAt}
+          </time>
 
           <div
-            className={`${styles.postContent} ${styles.previewContent}`}
+            className='mt-8 bg-gradient-to-b from-gray-100 bg-clip-text text-lg leading-8 text-gray-100 text-transparent [&_li]:mt-2 [&_p]:mt-6 [&_ul]:mt-6 [&_ul]:pl-6'
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
 
-          <div className={styles.continueReading}>
+          <div className='mx-0 mb-8 mt-16 rounded-[100px] bg-gray-850 p-8 text-center text-xl font-bold'>
             Wanna continue reading?
-            <Link href='/'>Subscribe now 🤗</Link>
+            <Link className='ml-2 text-yellow-500 hover:underline' href='/'>
+              Subscribe now 🤗
+            </Link>
           </div>
         </article>
       </main>
-    </>
+    </Fragment>
   );
 }
 
