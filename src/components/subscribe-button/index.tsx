@@ -4,8 +4,6 @@ import { signIn, useSession } from 'next-auth/react';
 
 import { api, getStripeJs } from '@/services';
 
-import styles from './styles.module.scss';
-
 type CustomSession =
   | (Session & {
       activeSubscription: object | null;
@@ -45,7 +43,7 @@ export function SubscribeButton() {
 
   return (
     <button
-      className={styles.subscribeButton}
+      className='flex h-16 w-64 items-center justify-center rounded-[2rem] border-0 bg-yellow-500 text-xl font-bold text-gray-900 transition delay-200 hover:brightness-[0.8]'
       type='button'
       onClick={handleSubscribe}
     >
