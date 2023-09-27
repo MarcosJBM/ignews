@@ -7,20 +7,19 @@ type ActiveLinkProps = Omit<
 > &
   LinkProps & {
     pageName: string;
-    activeClassName: string;
   };
 
-export function ActiveLink({
-  activeClassName,
-  pageName,
-  ...props
-}: ActiveLinkProps) {
+export function ActiveLink({ pageName, ...props }: ActiveLinkProps) {
   const { asPath } = useRouter();
 
-  const className = asPath === props.href ? activeClassName : '';
+  const isActive = asPath === props.href;
 
   return (
-    <Link {...props} className={className}>
+    <Link
+      {...props}
+      data-active={isActive}
+      className='relative inline-block h-20 px-2 py-0 leading-[5rem] text-gray-300 transition delay-200 last:ml-8 hover:text-white data-[active=true]:font-bold data-[active=true]:text-white data-[active=true]:after:absolute data-[active=true]:after:bottom-0 data-[active=true]:after:left-0 data-[active=true]:after:h-[3px] data-[active=true]:after:w-full data-[active=true]:after:rounded-t data-[active=true]:after:bg-yellow-500 data-[active=true]:after:content-[""]'
+    >
       {pageName}
     </Link>
   );
