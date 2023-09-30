@@ -43,4 +43,4 @@ Estas foram as principais tecnologias utilizadas no desenvolvimento da aplica√ß√
 - [Prismic](https://prismic.io/)
 - [Stripe](https://stripe.com/br)
 - [FaunaDB](https://fauna.com/)
-- [Sass](https://sass-lang.com/)
+- [TailwindCSS](https://tailwindcss.com/)
